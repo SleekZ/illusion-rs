@@ -26,7 +26,7 @@ unsafe fn main(image_handle: Handle, mut system_table: SystemTable<Boot>) -> Sta
                 },
             ) {
                 Ok(handle) => {
-                    log::info!("Loaded hypervisor into mermoy, starting..");
+                    log::info!("Loaded hypervisor into memory, starting..");
 
                     if let Err(error) = system_table.boot_services().start_image(handle) {
                         log::error!("Failed to start hypervisor ({:?})", error);
@@ -45,7 +45,7 @@ unsafe fn main(image_handle: Handle, mut system_table: SystemTable<Boot>) -> Sta
         }
     };
 
-    log::info!("Searching Windows boot manager (bootmgfw.efi)..");
+    log::info!("Searching for Windows boot manager (bootmgfw.efi)..");
 
     match images::find_windows_boot_manager(system_table.boot_services()) {
         Some(bootmgr_device_path) => {
